@@ -6,7 +6,7 @@ jest.mock('../lib/Potion.js');
 const Player = require('../lib/Player');
 
 test('creates a player object', () => {
-    const player = new Player ('Dave');
+    const player = new Player('Dave');
 
     expect(player.name).toBe('Dave');
     expect(player.health).toEqual(expect.any(Number));
@@ -27,7 +27,7 @@ test("gets player's stats as an object", () => {
 test("gets inventory from player or returns false", () => {
     const player = new Player('Dave');
 
-    expect( player.getInventory()).toEqual(expect.any(Array));
+    expect(player.getInventory()).toEqual(expect.any(Array));
 
     player.inventory = [];
 
@@ -55,7 +55,7 @@ test("subracts from player's health", () => {
     const oldHealth = player.health;
 
     player.reduceHealth(5);
-    
+
     expect(player.health).toBe(oldHealth - 5);
 
     player.reduceHealth(99999);
@@ -66,26 +66,26 @@ test("subracts from player's health", () => {
 test("gets player's attack value", () => {
     const player = new Player('Dave');
     player.strength = 10;
-  
+
     expect(player.getAttackValue()).toBeGreaterThanOrEqual(5);
     expect(player.getAttackValue()).toBeLessThanOrEqual(15);
-  });
+});
 
-  test('adds potion to the inventory', () => {
-      const player = new Player('Dave');
-      const oldCount = player.inventory.length;
+test('adds a potion to the inventory', () => {
+    const player = new Player('Dave');
+    const oldCount = player.inventory.length;
 
-      player.addPotion(new Potion());
+    player.addPotion(new Potion());
 
-      expect(player.inventory.length).toBeGreaterThan(oldCount);
-  });
+    expect(player.inventory.length).toBeGreaterThan(oldCount);
+});
 
-  test('uses a potion from inventory', () => {
-      const player = new Player('Dave');
-      player.inventory = [new Potion(), new Potion(), new Potion()];
-      const oldCount = player.inventory.length;
+test('uses a potion from inventory', () => {
+    const player = new Player('Dave');
+    player.inventory = [new Potion(), new Potion(), new Potion()];
+    const oldCount = player.inventory.length;
 
-      player.usePotion(1);
+    player.usePotion(1);
 
-      expect(player.inventory.length).toBeLessThan(oldCount);
-  });
+    expect(player.inventory.length).toBeLessThan(oldCount);
+});
